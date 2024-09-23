@@ -15,7 +15,7 @@ const BookList = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {books.map((book) => (
         <Link to={`/book/${book.id}`} key={book.id} className="block">
-          <div className="bg-white dark:bg-gray-800 p-4 rounded shadow-md flex flex-col items-center">
+          <div className="bg-gradient-to-b from-gray-400 to-gray-100 dark:from-gray-600 dark:to-gray-800 p-4 rounded shadow-md flex flex-col items-center">
             {book.volumeInfo.imageLinks?.thumbnail && (
               <img
                 src={book.volumeInfo.imageLinks.thumbnail}

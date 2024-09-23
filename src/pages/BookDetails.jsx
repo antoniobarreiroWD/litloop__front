@@ -35,7 +35,7 @@ const BookDetails = () => {
         Volver al Inicio
       </button>
 
-      <div className="bg-gray-200 dark:bg-gray-700 p-6 rounded shadow-md flex flex-col lg:flex-row items-center lg:items-start">
+      <div className="bg-gradient-to-b from-gray-400 to-gray-100 dark:from-gray-600 dark:to-gray-800 p-6 rounded shadow-md flex flex-col lg:flex-row items-center lg:items-start">
        
         {volumeInfo.imageLinks?.thumbnail && (
           <img
