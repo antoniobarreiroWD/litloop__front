@@ -1,17 +1,8 @@
-import React, { useState } from 'react';
-import { FaSun, FaMoon } from 'react-icons/fa';   
-
+import React from 'react';
+import { FaSun, FaMoon } from 'react-icons/fa';
+import useThemeStore from './useThemeStore'; 
 const Navbar = () => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    if (!darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
+  const { darkMode, toggleDarkMode } = useThemeStore();
 
   return (
     <nav className="p-4 bg-gradient-to-r from-primary-gradient to-secondary-gradient text-white">
@@ -19,12 +10,12 @@ const Navbar = () => {
         <h1 className="text-xl font-bold">LitLoop</h1>
         <button
           onClick={toggleDarkMode}
-          className="p-2  text-black rounded flex items-center"
+          className="p-2 text-black rounded flex items-center"
         >
           {darkMode ? (
-            <FaSun className="w-6 h-6" /> 
+            <FaSun className="w-6 h-6" />
           ) : (
-            <FaMoon className="w-6 h-6" /> 
+            <FaMoon className="w-6 h-6" />
           )}
         </button>
       </div>
