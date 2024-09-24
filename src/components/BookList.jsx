@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import useSWR from 'swr';
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BookList = () => {
-  const [books, setBooks] = useState([]);
+  const { data: books, error } = useSWR('http://localhost:3001/books/popular', fetcher);
 
-  useEffect(() => {
-    fetch('http://localhost:3001/books/popular')
-      .then((response) => response.json())
-      .then((data) => setBooks(data))
-      .catch((error) => console.error('Error fetching books:', error));
-  }, []);
+  if (error) {
+    return <p>Error al cargar los libros: {error.message}</p>;
+  }
+
+  if (!books) {
+    return <p>Cargando...</p>; 
+  }
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -40,3 +44,4 @@ const BookList = () => {
 };
 
 export default BookList;
+
