@@ -5,7 +5,7 @@ import useSWR from 'swr';
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BookList = () => {
-  const { data: books, error } = useSWR('http://localhost:3001/books/popular', fetcher);
+  const { data: books, error } = useSWR('http://localhost:3001/api/books/popular', fetcher);
 
   if (error) {
     return <p>Error al cargar los libros: {error.message}</p>;

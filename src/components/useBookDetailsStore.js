@@ -8,7 +8,7 @@ const useBookDetailsStore = create((set) => ({
   fetchBookDetails: async (id) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`http://localhost:3001/books/${id}`);
+      const response = await fetch(`http://localhost:3001/api/books/${id}`);
       if (!response.ok) {
         throw new Error('Error al obtener los detalles del libro');
       }
