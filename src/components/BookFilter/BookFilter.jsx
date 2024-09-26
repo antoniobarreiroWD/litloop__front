@@ -1,5 +1,5 @@
 import React from 'react';
-import useFilterStore from './useFilterStore';
+import useFilterStore from '../useFilterStore';
 
 const BookFilter = () => {
   const { query, category, year, setQuery, setCategory, setYear, setFilters } = useFilterStore();

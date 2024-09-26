@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
-import BookSearch from './BookSearch';
-import BookResults from './BookResults';
-import BookList from './BookList';  
-import useBookStore from './useStore';
+import BookSearch from '../BookSearch/BookSearch';
+import BookResults from '../BookResults/BookResults';
+import BookList from '../BookList/BookList';  
+import useBookStore from '../useStore';
 
 const BookPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
@@ -12,7 +12,7 @@ const BookPage = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3001/books/search', {
+      const response = await fetch('http://localhost:3001/api/books/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,8 +45,10 @@ const BookPage = () => {
   };
 
   return (
+  
     <div className=''>
-      <BookSearch />
+     
+      <BookSearch  className="m"  />
       {loading && <p>Cargando...</p>}
       {error && <p>{error}</p>}
       

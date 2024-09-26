@@ -167,6 +167,7 @@ i18n
             "Literary Collections / Essays" : "Colecciones Literarias / Ensayos",
             "Social Science / Sociology / Marriage & Family" : "Ciencias Sociales / Sociología / Matrimonio y Familia",
             "Social Science / Sociology / General" : "Ciencias Sociales / Sociología / General",
+            "Fiction / World Literature / Ireland / 21st Century" : "Ficción / Literatura Mundial / Irlanda / Siglo XXI",
         },
       },
     },
