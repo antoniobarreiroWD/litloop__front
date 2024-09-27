@@ -1,10 +1,10 @@
 import React from "react";
 
-const Title = ({ fontSize = "56px", children, ...props }) => {
+const Title = ({  children, ...props }) => {
   return (
     <h1
-      className={`text-center font-bold ${props.className || ""}`}
-      style={{ fontSize }}
+      className={`text-center font-bold  ${props.className || ""}`}
+      style={{  }}
       {...props}
     >
       {children}

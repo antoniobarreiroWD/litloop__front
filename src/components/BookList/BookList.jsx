@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import useThemeStore from '../useThemeStore'; 
 
+
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BookList = () => {
@@ -26,7 +27,12 @@ const BookList = () => {
 
   return (
     <>
-      
+   
+    <div className={`font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+      <h2 className="text-4xl font-bold m-20">
+          Los más populares últimamente
+        </h2>
+    </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {books.map((book) => (
@@ -54,6 +60,8 @@ const BookList = () => {
           </Link>
         ))}
       </div>
+
+ 
     </>
   );
 };

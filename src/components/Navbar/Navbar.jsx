@@ -134,12 +134,7 @@ const Navbar = () => {
                 </>
               )}
             </div>
-            <button
-                onClick={toggleDarkMode}
-                className="p-2 rounded-full flex items-center text-white bg-[#112d55] hover:bg-[#1f3c88]"
-              >
-                {darkMode ? <FaSun className="w-7 h-7" /> : <FaMoon className="w-7 h-7" />}
-              </button>
+            
           </div>
         )}
       </div>

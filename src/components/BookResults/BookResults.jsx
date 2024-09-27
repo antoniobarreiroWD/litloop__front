@@ -13,7 +13,7 @@ const BookResults = () => {
 
   return (
 <>
-  <h2 className={`text-2xl font-bold mb-4 mt-6 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+  <h2 className={`text-4xl font-bold m-20 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
     Resultados de la búsqueda
   </h2>
 

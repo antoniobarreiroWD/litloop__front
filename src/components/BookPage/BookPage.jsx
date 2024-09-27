@@ -1,13 +1,15 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import BookSearch from '../BookSearch/BookSearch';
 import BookResults from '../BookResults/BookResults';
 import BookList from '../BookList/BookList';  
 import useBookStore from '../useStore';
 import useThemeStore from '../useThemeStore';
+import { FaSearch, FaTimes } from 'react-icons/fa'; 
 
 const BookPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
   const { darkMode } = useThemeStore();
+  const [showSearch, setShowSearch] = useState(false); 
 
   const fetchBooks = useCallback(async (query, page = 1) => {
     setLoading(true);
@@ -46,15 +48,26 @@ const BookPage = () => {
     setCurrentPage(page);
   };
 
+  const toggleSearch = () => {
+    setShowSearch((prev) => !prev); 
+  };
+
   return (
     <div className="flex flex-col items-center">
       <div className={`font-bold mt-6 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-        <h2 className="text-2xl font-bold mt-6">
-          Los más populares últimamente
-        </h2>
+        
         <div className="mt-4 w-full flex justify-center">
-          <BookSearch />
+          <button onClick={toggleSearch} className="text-2xl p-2 focus:outline-none z-50">
+            {showSearch ? <FaTimes className='text-red-700' /> : <FaSearch className={`${darkMode ? 'text-white':'text-black'}`} />}
+          </button>
         </div>
+
+        
+        {showSearch && (
+          <div className="mt-4 w-full flex justify-center">
+            <BookSearch />
+          </div>
+        )}
       </div>
       
       {loading && <p>Cargando...</p>}
@@ -88,3 +101,4 @@ const BookPage = () => {
 };
 
 export default BookPage;
+
