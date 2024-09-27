@@ -14,9 +14,10 @@ const BookSearch = () => {
   };
 
   return (
-    <div className={`relative transform ${darkMode ? 'bg-gradient-to-b from-secondary via-[#f07de885] to-third' : 'bg-gradient-to-b from-[#42E9E4] via-[#42e9e367]  to-gray-100'} 
-    w-full p-2 rounded xl:w-1/2 2xl:left-3/4 2xl:transform 2xl:-translate-x-1/2`}>
-      <div className="mb-4 flex items-center">
+    <div className={`relative transform ${darkMode ? 'bg-gradient-to-b from-secondary via-[#f07de885] to-third' : 'bg-gradient-to-b from-[#42E9E4] via-[#42e9e367] to-gray-100'} 
+  w-full p-2 rounded `}>
+
+      <div className="flex flex-col mb-4">
         <label className={`block text-sm font-bold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
           Buscar por título o autor:
         </label>

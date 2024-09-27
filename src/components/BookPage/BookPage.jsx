@@ -3,9 +3,11 @@ import BookSearch from '../BookSearch/BookSearch';
 import BookResults from '../BookResults/BookResults';
 import BookList from '../BookList/BookList';  
 import useBookStore from '../useStore';
+import useThemeStore from '../useThemeStore';
 
 const BookPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
+  const { darkMode } = useThemeStore();
 
   const fetchBooks = useCallback(async (query, page = 1) => {
     setLoading(true);
@@ -32,7 +34,7 @@ const BookPage = () => {
     }
 
     setLoading(false);
-  }, [setBooks, setTotalPages, setLoading, setError]);  
+  }, [setBooks, setTotalPages, setLoading, setError]);
 
   useEffect(() => {
     if (searchQuery) {
@@ -45,13 +47,19 @@ const BookPage = () => {
   };
 
   return (
-  
-    <div className=''>
-     
-      <BookSearch  className="m"  />
+    <div className="flex flex-col items-center">
+      <div className={`font-bold mt-6 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+        <h2 className="text-2xl font-bold mt-6">
+          Los más populares últimamente
+        </h2>
+        <div className="mt-4 w-full flex justify-center">
+          <BookSearch />
+        </div>
+      </div>
+      
       {loading && <p>Cargando...</p>}
       {error && <p>{error}</p>}
-      
+
       {searchQuery ? (
         <BookResults books={books} />
       ) : (
