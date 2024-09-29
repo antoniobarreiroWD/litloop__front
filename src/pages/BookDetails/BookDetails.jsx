@@ -81,9 +81,8 @@ const BookDetails = () => {
       animate={{ opacity: 1, x: 0 }}    
       exit={{ opacity: 0, x: 100 }}      
       transition={{ duration: 0.5 }}     
-     
     >
-      <div className="container mx-auto py-10 px-40">
+      <div className="container max-w-screen-lg mx-auto py-6 px-4 sm:px-8">
         <button
           onClick={() => navigate('/')} 
           className="bg-blue-500 text-white py-2 px-4 rounded mb-4"
@@ -91,35 +90,37 @@ const BookDetails = () => {
           Volver al Inicio
         </button>
 
-        <div className={`p-6 rounded shadow-md flex flex-col lg:flex-row items-center lg:items-start ${darkMode ? 'bg-gradient-to-b from-gray-600 to-gray-800' : 'bg-gradient-to-b from-gray-400 to-gray-100'}`}>
-          {volumeInfo.imageLinks?.thumbnail && (
-            <img
-              src={volumeInfo.imageLinks.thumbnail}
-              alt={`Portada de ${volumeInfo.title}`}
-              className="w-48 h-64 object-cover mb-4 rounded lg:mr-8"
-            />
+        <div className={`p-4 rounded-lg flex flex-col items-center sm:flex-row sm:items-start ${
+              darkMode ? 'bg-gradient-to-b from-third via-[#67328a] to-third' : 'bg-gradient-to-b from-[#f3f4f6] via-primary to-[#f3f4f6]'
+            }`}>
+              {book.volumeInfo.imageLinks?.thumbnail && (
+                <img
+                  src={book.volumeInfo.imageLinks.thumbnail}
+                  alt={`Portada de ${book.volumeInfo.title}`}
+                  className="w-32 h-48 sm:w-40 sm:h-60 md:w-56 md:h-80 object-cover mb-4 sm:mb-0 sm:mr-8 rounded"
+                />
           )}
 
           <div className="flex-1">
-            <h2 className={`text-3xl font-bold mb-2 text-center lg:text-left ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+            <h2 className={`text-2xl md:text-3xl font-bold mb-2 text-center sm:text-left ${darkMode ? 'text-white' : 'text-gray-900'}`}>
               {volumeInfo.title}
             </h2>
 
             {volumeInfo.authors && (
-              <p className={`text-center lg:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <p className={`text-center sm:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 <strong>Autor(es):</strong> {volumeInfo.authors.join(', ')}
               </p>
             )}
 
-            <p className={`text-center lg:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-center sm:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               <strong>Editorial:</strong> {volumeInfo.publisher}
             </p>
-            <p className={`text-center lg:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className={`text-center sm:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
               <strong>Fecha de publicación:</strong> {volumeInfo.publishedDate}
             </p>
 
             {translatedCategories.length > 0 && (
-              <p className={`text-center lg:text-left mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <p className={`text-center sm:text-left mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 <strong>Categorías:</strong> {translatedCategories.join(', ')}
               </p>
             )}

@@ -28,7 +28,7 @@ const BookList = () => {
   return (
     <>
    
-    <div className={`font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+    <div className={`  font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
       <h2 className="text-4xl font-bold m-20">
           Los más populares últimamente
         </h2>
@@ -37,7 +37,7 @@ const BookList = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {books.map((book) => (
           <Link to={`/book/${book.id}`} key={book.id} className="block">
-            <div className={`p-4 rounded flex flex-col items-center  ${
+            <div className={`p-4 rounded flex flex-col items-center ${
               darkMode ? 'bg-gradient-to-b from-third via-[#67328a] to-third' : 'bg-gradient-to-b from-[#f3f4f6] via-primary to-[#f3f4f6]'
             }`}>
               {book.volumeInfo.imageLinks?.thumbnail && (

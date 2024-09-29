@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from "react"
 import authService from "../services/auth.service"
 import { useNavigate } from "react-router-dom"
 
+
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = getToken()
       if (token) {
+
         const loggedUser = await authService.getUser(token)
         setUser(loggedUser)
       }
