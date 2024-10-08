@@ -4,11 +4,11 @@ import Title from "../../components/Title/Title";
 import ProfileBanner from "../../components/ProfileBanner/ProfileBanner";
 import { AuthContext } from "../../contexts/AuthContext";
 import useThemeStore from "../../components/useThemeStore";
-import ShowFavoriteBooks from "../../components/ShowFavoriteBooks/ShowFavoriteBooks"; 
+
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext); 
-  const { username, email, avatar, favoriteBooks } = user || {}; 
+  const { username, email, avatar } = user || {}; 
   const { darkMode } = useThemeStore();
 
   const handleUserEdit = () => {};
@@ -36,7 +36,7 @@ const ProfilePage = () => {
         />
 
      
-        {favoriteBooks && <ShowFavoriteBooks favoriteBooks={favoriteBooks} />}
+       
 
       </div>
     </PageWrapper>

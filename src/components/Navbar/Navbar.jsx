@@ -26,7 +26,7 @@ const Navbar = () => {
       darkMode
         ? "bg-gradient-to-r from-[#101231] via-secondary to-[#101231] bg-right"
         : "bg-gradient-to-r from-background via-primary to-background bg-left"
-    } relative transition-all duration-700 ease-in-out`}
+    } relative transition-all duration-700 ease-in-out m-2`}
   >
     <div className="absolute left-4 top-1 sm:left-2 sm:top-1 2xl:left-4 2xl:top-2 z-50">
       <CustomLink to="/">
@@ -49,13 +49,13 @@ const Navbar = () => {
   
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded-full flex items-center text-black bg-white hover:bg-gray-300 transition-colors duration-700"
+          className="p-2 rounded-full flex items-center text-black bg-white hover:bg-gray-300 transition-colors duration-700 "
         >
           {darkMode ? <FaSun className="w-6 h-6" /> : <FaMoon className="w-6 h-6" />}
         </button>
       </div>
   
-      <div className="hidden md:flex items-center space-x-28 justify-center w-full absolute p-2 transform left-1/2 -translate-x-1/2 2xl:top-16 z-50">
+      <div className="hidden md:flex items-center space-x-28 justify-center w-full absolute p-2 transform left-1/2 -translate-x-1/2 2xl:top-16 z-50 ">
         {NAVIGATION_LINK.map(({ link, text }) => {
           const isActiveLink = location.pathname === link;
           return (
@@ -63,8 +63,8 @@ const Navbar = () => {
               to={link}
               key={text}
               className={`${
-                isActiveLink ? "underline font-bold" : "font-normal"
-              } ${darkMode ? "text-white" : "text-gray-900"} hover:underline transition-colors duration-700`}
+                isActiveLink ? "bg-[#1f3c88] font-bold" : "bg-[#112d55] font-normal"
+              } rounded-lg p-2 text-white bg-[#112d55] hover:bg-[#1f3c88] transition-colors duration-700`}
             >
               {text}
             </NavigationLink>
@@ -72,7 +72,7 @@ const Navbar = () => {
         })}
       </div>
   
-      <div className="hidden md:flex items-center space-x-4 z-50 ml-auto 2xl:absolute 2xl:top-16 2xl:right-4">
+      <div className="hidden md:flex items-center space-x-4 z-50 ml-auto 2xl:absolute 2xl:top-16 2xl:right-4 m-2">
         <div className={`flex gap-2 ${darkMode ? "text-white" : "text-gray-900"}`}>
           {user ? (
             <>
@@ -91,7 +91,7 @@ const Navbar = () => {
   
         <button
           onClick={toggleDarkMode}
-          className="p-2 rounded-full flex items-center text-white bg-[#112d55] hover:bg-[#1f3c88] transition-colors duration-700"
+          className="p-2 rounded-full flex items-center text-white bg-[#112d55] hover:bg-[#1f3c88] transition-colors duration-700 "
         >
           {darkMode ? <FaSun className="w-7 h-7" /> : <FaMoon className="w-7 h-7" />}
         </button>
@@ -142,4 +142,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

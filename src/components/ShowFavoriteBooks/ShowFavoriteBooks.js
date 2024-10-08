@@ -40,13 +40,13 @@ const ShowFavoriteBooks = () => {
         }
     }, [favoriteBooks]);
 
-    if (loading) {
+    /* if (loading) {
         return <p>Cargando libros favoritos...</p>;
-    }
+    } */
 
-    if (!booksData || booksData.length === 0) {
+  /*   if (!booksData || booksData.length === 0) {
         return <p>No tienes libros favoritos aún.</p>;
-    }
+    } */
 
     return (
         <>

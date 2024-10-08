@@ -8,6 +8,7 @@ import NotFoundPage from "../pages/NotFoundPage/NotFoundPage"
 import AuthMiddleware from "../middlewares/AuthMiddleware"
 
 import BookDetails from "../pages/BookDetails/BookDetails"
+import ShowFavoriteBooks from "../components/ShowFavoriteBooks/ShowFavoriteBooks"
 
 const AppRoutes = () => {
   const router = createBrowserRouter([
@@ -23,6 +24,11 @@ const AppRoutes = () => {
         {
           path: "/login",
           element: <LoginPage />,
+        },
+        {
+          path: "/books",
+          element: <ShowFavoriteBooks
+               />,
         },
 
 
