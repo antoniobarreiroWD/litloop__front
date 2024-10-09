@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import useBookStore from '../useStore';
 import useThemeStore from '../useThemeStore';
 import BookCard from '../BookCard/BookCard';

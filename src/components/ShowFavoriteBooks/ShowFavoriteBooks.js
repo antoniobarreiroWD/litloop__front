@@ -23,7 +23,6 @@ const ShowFavoriteBooks = () => {
 
   useEffect(() => {
     const fetchFavoriteBooksData = async () => {
-      
       if (!user || !user.favoriteBooks || user.favoriteBooks.length === 0) {
         setLoading(false);
         return;
@@ -35,6 +34,10 @@ const ShowFavoriteBooks = () => {
         const booksInfo = await Promise.all(
           user.favoriteBooks.map((book) => fetchBookData(book.bookId))
         );
+        
+       
+      
+
         setBooksData(booksInfo);
       } catch (error) {
         setError('No se pudieron cargar los libros favoritos. Inténtalo más tarde.');
@@ -65,8 +68,8 @@ const ShowFavoriteBooks = () => {
   return (
     <>
       <div className={`font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-        <h2 className="text-4xl font-bold m-20">Tus Libros Favoritos</h2>
       </div>
+        <h2 className="text-4xl font-bold m-20">Tus Libros Favoritos</h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 gap-7">
         {booksData.map((book) => (

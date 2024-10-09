@@ -11,7 +11,7 @@ const Layout = () => {
   return (
     <AuthProvider>
       <div
-        className={`min-h-screen flex flex-col transition-colors duration-700 ${
+        className={`min-h-screen flex flex-col transition-colors duration-700 font-sans ${
           darkMode ? "bg-third" : "bg-background"
         }`}
       >

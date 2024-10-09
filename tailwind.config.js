@@ -15,6 +15,9 @@ module.exports = {
         topBlueList:'#252872f8'
          
       },
+      fontFamily: {
+        sans: ['Quicksand', 'sans-serif'], 
+      },
       gradientColorStops: theme => ({
         'primary-gradient': '#0ea5e9',
         'secondary-gradient': '#f472b6',

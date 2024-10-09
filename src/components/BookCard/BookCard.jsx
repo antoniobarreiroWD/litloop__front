@@ -5,16 +5,18 @@ import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 const BookCard = ({ book, showDetails = true }) => {
   const { darkMode } = useThemeStore();
-  const imageUrl = book.volumeInfo.imageLinks?.thumbnail || '';
-  const title = book.volumeInfo.title || 'Título desconocido';
-  const authors = book.volumeInfo.authors?.join(', ') || 'Autor desconocido';
-  const publishedDate = book.volumeInfo.publishedDate || 'Fecha desconocida';
+
+ 
+  const imageUrl = book.volumeInfo?.imageLinks?.thumbnail || 'ruta-de-imagen-predeterminada.jpg';
+  const title = book.volumeInfo?.title || 'Título desconocido';
+  const authors = book.volumeInfo?.authors?.join(', ') || 'Autor desconocido';
+  const publishedDate = book.volumeInfo?.publishedDate || 'Fecha desconocida';
 
   return (
     <div
       className={`relative rounded-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 ${
         darkMode ? 'bg-gray-800' : 'bg-white'
-      } `}
+      }`}
     >
       <Link to={`/book/${book.id}`}>
         <img
