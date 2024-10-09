@@ -9,6 +9,7 @@ import AuthMiddleware from "../middlewares/AuthMiddleware"
 
 import BookDetails from "../pages/BookDetails/BookDetails"
 import ShowFavoriteBooks from "../components/ShowFavoriteBooks/ShowFavoriteBooks"
+import SearchPage from "../pages/SearchPage/SearchPage"
 
 const AppRoutes = () => {
   const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const AppRoutes = () => {
           element: <ShowFavoriteBooks
                />,
         },
+        {
+          path: "/search",
+          element: <SearchPage />,
+        } ,
 
 
 

@@ -1,6 +1,5 @@
 import React from 'react';
-
-import BookPage from '../../components/BookPage/BookPage';
+import BookList from '../../components/BookList/BookList';
 
 
 const HomePage = () => {
@@ -8,7 +7,7 @@ const HomePage = () => {
     <div className="container mx-auto py-10">
     
      
-      <BookPage />
+      <BookList />
       
     </div>
   );

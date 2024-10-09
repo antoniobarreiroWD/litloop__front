@@ -1,144 +1,157 @@
-import React, { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
-import CustomLink from "../CustomLink/CustomLink";
-import AuthLink from "../AuthLink/AuthLink";
-import NavigationLink from "../NavigationLink/NavigationLink";
-import { AuthContext } from "../../contexts/AuthContext";
-import { FaSun, FaMoon, FaBars, FaUser } from "react-icons/fa";
-import useThemeStore from "../useThemeStore";
-import logo from "../../assets/logo.webp";
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { FaSun, FaMoon, FaBars, FaUser, FaTimes } from 'react-icons/fa';
+import useThemeStore from '../useThemeStore';
+import logo from '../../assets/logo.webp';
+import AuthLink from '../AuthLink/AuthLink';
+import NavigationLink from '../NavigationLink/NavigationLink';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Navbar = () => {
   const { darkMode, toggleDarkMode } = useThemeStore();
   const { user, logout } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const NAVIGATION_LINK = [
-    { link: "/", text: "Home" },
-    { link: "/Books", text: "Mis Libros" },
-  ];
-
   const location = useLocation();
 
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [darkMode]);
+
+  const NAVIGATION_LINK = [
+    { link: '/', text: 'Inicio' },
+    { link: '/search', text: 'Búsqueda' }, 
+  ];
+
+  
+  if (user) {
+    NAVIGATION_LINK.splice(1, 0, { link: '/Books', text: 'Mis Libros' });
+  }
+
   return (
-    <nav
-    className={` ${
-      darkMode
-        ? "bg-gradient-to-r from-[#101231] via-secondary to-[#101231] bg-right"
-        : "bg-gradient-to-r from-background via-primary to-background bg-left"
-    } relative transition-all duration-700 ease-in-out m-2`}
-  >
-    <div className="absolute left-4 top-1 sm:left-2 sm:top-1 2xl:left-4 2xl:top-2 z-50">
-      <CustomLink to="/">
-        <img
-          src={logo}
-          alt="LitLoop Logo"
-          className="h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32 2xl:h-auto 2xl:w-1/3 rounded-full"
-        />
-      </CustomLink>
-    </div>
-  
-    <div className="container mx-auto flex justify-between items-center p-4 2xl:mb-40 relative max-w-full">
-      <div className="md:hidden flex items-center space-x-4 ml-auto z-50 mt-2 relative">
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-2xl focus:outline-none"
-        >
-          <FaBars />
-        </button>
-  
-        <button
-          onClick={toggleDarkMode}
-          className="p-2 rounded-full flex items-center text-black bg-white hover:bg-gray-300 transition-colors duration-700 "
-        >
-          {darkMode ? <FaSun className="w-6 h-6" /> : <FaMoon className="w-6 h-6" />}
-        </button>
-      </div>
-  
-      <div className="hidden md:flex items-center space-x-28 justify-center w-full absolute p-2 transform left-1/2 -translate-x-1/2 2xl:top-16 z-50 ">
-        {NAVIGATION_LINK.map(({ link, text }) => {
-          const isActiveLink = location.pathname === link;
-          return (
-            <NavigationLink
-              to={link}
-              key={text}
-              className={`${
-                isActiveLink ? "bg-[#1f3c88] font-bold" : "bg-[#112d55] font-normal"
-              } rounded-lg p-2 text-white bg-[#112d55] hover:bg-[#1f3c88] transition-colors duration-700`}
-            >
-              {text}
-            </NavigationLink>
-          );
-        })}
-      </div>
-  
-      <div className="hidden md:flex items-center space-x-4 z-50 ml-auto 2xl:absolute 2xl:top-16 2xl:right-4 m-2">
-        <div className={`flex gap-2 ${darkMode ? "text-white" : "text-gray-900"}`}>
-          {user ? (
-            <>
-              <AuthLink to="/profile">
-                <FaUser className="w-6 h-6" />
-              </AuthLink>
-              <AuthLink onClick={logout}>Logout</AuthLink>
-            </>
-          ) : (
-            <>
-              <AuthLink to="/login">Login</AuthLink>
-              <AuthLink to="/signup">Signup</AuthLink>
-            </>
-          )}
+    <nav className="bg-[#040714] bg-opacity-90 backdrop-blur-md fixed w-full z-50 transition-all duration-700 ease-in-out p-4">
+      <div className="container mx-auto flex justify-between items-center max-w-screen-2xl">
+       
+        <div className="flex flex-1 justify-start">
+          <NavigationLink to="/">
+            <img
+              src={logo}
+              alt="LitLoop Logo"
+              className="h-12 w-auto lg:h-20 transition-transform duration-300 hover:scale-105 rounded-full"
+            />
+          </NavigationLink>
         </div>
-  
-        <button
-          onClick={toggleDarkMode}
-          className="p-2 rounded-full flex items-center text-white bg-[#112d55] hover:bg-[#1f3c88] transition-colors duration-700 "
-        >
-          {darkMode ? <FaSun className="w-7 h-7" /> : <FaMoon className="w-7 h-7" />}
-        </button>
-      </div>
-  
-      {isMenuOpen && (
-        <div className="md:hidden flex flex-col items-center mt-4 space-y-2 z-40">
+
+        <div className="hidden md:flex flex-1 justify-center items-center space-x-10">
           {NAVIGATION_LINK.map(({ link, text }) => {
             const isActiveLink = location.pathname === link;
             return (
               <NavigationLink
                 to={link}
                 key={text}
-                className={`${
-                  isActiveLink ? "underline font-bold" : "font-normal"
-                } ${darkMode ? "text-white" : "text-gray-900"} hover:underline transition-colors duration-700`}
+                className={`text-white tracking-wide ${isActiveLink ? 'font-semibold border-b-2 border-white' : 'font-light'} hover:text-gray-300 transition-colors duration-300`}
               >
                 {text}
               </NavigationLink>
             );
           })}
-  
-          <div
-            className={`flex flex-col items-center gap-2 ${
-              darkMode ? "text-white" : "text-gray-900"
-            }`}
+        </div>
+
+        <div className="hidden md:flex flex-1 justify-end items-center space-x-6">
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full text-white hover:bg-gray-700 transition-colors duration-300"
           >
+            {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+          </button>
+
+          <div className="flex items-center space-x-4 text-white">
             {user ? (
               <>
                 <AuthLink to="/profile">
-                  <FaUser className="w-4 h-4 bg-[#112d55]" />
+                  <FaUser className="w-5 h-5 hover:text-gray-300 transition-colors duration-300" />
                 </AuthLink>
-                <AuthLink onClick={logout}>Logout</AuthLink>
+                <AuthLink onClick={logout} className="hover:text-gray-300 transition-colors duration-300">
+                  Logout
+                </AuthLink>
               </>
             ) : (
               <>
-                <AuthLink to="/login">Login</AuthLink>
-                <AuthLink to="/signup">Signup</AuthLink>
+                <AuthLink to="/login" className="hover:text-gray-300 transition-colors duration-300">
+                  Login
+                </AuthLink>
+                <AuthLink to="/signup" className="hover:text-gray-300 transition-colors duration-300">
+                  Signup
+                </AuthLink>
               </>
             )}
           </div>
         </div>
+
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white focus:outline-none p-2"
+          >
+            {isMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+          </button>
+        </div>
+      </div>
+
+      {isMenuOpen && (
+        <div className="md:hidden bg-[#040714] p-4 space-y-4">
+          {NAVIGATION_LINK.map(({ link, text }) => {
+            const isActiveLink = location.pathname === link;
+            return (
+              <NavigationLink
+                to={link}
+                key={text}
+                className={`block text-white ${isActiveLink ? 'font-semibold' : 'font-light'} hover:text-gray-300 transition-colors duration-300`}
+                onClick={() => setIsMenuOpen(false)}  
+              >
+                {text}
+              </NavigationLink>
+            );
+          })}
+
+          <div className="flex items-center space-x-4 text-white">
+            {user ? (
+              <>
+                <AuthLink to="/profile" onClick={() => setIsMenuOpen(false)}>
+                  Profile
+                </AuthLink>
+                <AuthLink onClick={logout} className="hover:text-gray-300 transition-colors duration-300">
+                  Logout
+                </AuthLink>
+              </>
+            ) : (
+              <>
+                <AuthLink to="/login" className="hover:text-gray-300 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
+                  Login
+                </AuthLink>
+                <AuthLink to="/signup" className="hover:text-gray-300 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
+                  Signup
+                </AuthLink>
+              </>
+            )}
+          </div>
+
+          <div className="mt-4 flex items-center justify-center">
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 rounded-full text-white hover:bg-gray-700 transition-colors duration-300"
+            >
+              {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
       )}
-    </div>
-  </nav>
-  
+    </nav>
   );
 };
 
 export default Navbar;
+

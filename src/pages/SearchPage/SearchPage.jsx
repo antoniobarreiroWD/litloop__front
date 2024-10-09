@@ -1,15 +1,12 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import BookSearch from '../BookSearch/BookSearch';
-import BookResults from '../BookResults/BookResults';
-import BookList from '../BookList/BookList';  
-import useBookStore from '../useStore';
-import useThemeStore from '../useThemeStore';
-import { FaSearch, FaTimes } from 'react-icons/fa'; 
+import React, { useEffect, useCallback } from 'react';
+import BookSearch from '.././../components/BookSearch/BookSearch';
+import BookResults from '.././../components/BookResults/BookResults';
+import useBookStore from '../../components/useStore';
+import useThemeStore from '../../components/useThemeStore';
 
-const BookPage = () => {
+const SearchPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
   const { darkMode } = useThemeStore();
-  const [showSearch, setShowSearch] = useState(false); 
 
   const fetchBooks = useCallback(async (query, page = 1) => {
     setLoading(true);
@@ -48,26 +45,13 @@ const BookPage = () => {
     setCurrentPage(page);
   };
 
-  const toggleSearch = () => {
-    setShowSearch((prev) => !prev); 
-  };
-
   return (
-    <div className="flex flex-col items-center">
-      <div className={`font-bold mt-6 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-        
-        <div className="mt-4 w-full flex justify-center">
-          <button onClick={toggleSearch} className="text-2xl p-2 focus:outline-none z-50">
-            {showSearch ? <FaTimes className='text-red-700' /> : <FaSearch className={`${darkMode ? 'text-white':'text-black'}`} />}
-          </button>
+    <div className={`min-h-screen p-10 ${darkMode ? ' text-white' : ' text-gray-900'}`}>
+      <h1 className="text-center text-3xl font-bold mb-10">Buscar Libros</h1>
+      <div className="flex justify-center mb-10">
+        <div className="w-full max-w-3xl">
+          <BookSearch />
         </div>
-
-        
-        {showSearch && (
-          <div className="mt-4 w-full flex justify-center">
-            <BookSearch />
-          </div>
-        )}
       </div>
       
       {loading && <p>Cargando...</p>}
@@ -76,7 +60,7 @@ const BookPage = () => {
       {searchQuery ? (
         <BookResults books={books} />
       ) : (
-        <BookList />
+        <p className="text-center">Introduce un término de búsqueda para ver resultados.</p>
       )}
 
       {totalPages > 1 && searchQuery && (
@@ -100,4 +84,4 @@ const BookPage = () => {
   );
 };
 
-export default BookPage;
+export default SearchPage;

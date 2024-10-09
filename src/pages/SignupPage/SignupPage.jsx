@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormPageLayout from "../../components/FormPageLayout/FormPageLayout";
 import CustomForm from "../../components/CustomForm/CustomForm";
 import authService from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,7 @@ const SignupPage = () => {
   };
 
   return (
+    <FormPageLayout>
     <CustomForm
       marginBottom={"80px"}
       title={"Signup"}
@@ -36,6 +38,7 @@ const SignupPage = () => {
       onSubmit={onSubmit}
       options={["username", "email", "password"]}
     />
+  </FormPageLayout>
   );
 };
 

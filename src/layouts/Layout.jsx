@@ -18,9 +18,10 @@ const Layout = () => {
         <Navbar />
         <main className="flex-grow">
          
-          <section className="p-4 sm:p-6 lg:p-8 max-w-screen-2xl mx-auto">
-            <Outlet />
-          </section>
+        <section className="max-w-screen-2xl mx-auto p-10 m-20">
+  <Outlet />
+</section>
+
         </main>
         <Footer />
       </div>
