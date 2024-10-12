@@ -11,19 +11,17 @@ const Layout = () => {
   return (
     <AuthProvider>
       <div
-        className={`min-h-screen flex flex-col transition-colors duration-700 font-sans ${
-          darkMode ? "bg-third" : "bg-background"
+        className={`min-h-screen flex flex-col transition-colors duration-1000 font-sans ${
+          darkMode ? "bg-third text-white" : "bg-background text-black"
         }`}
       >
-        <Navbar />
+        <Navbar darkMode={darkMode} />
         <main className="flex-grow">
-         
-        <section className="max-w-screen-2xl mx-auto p-10 m-20">
-  <Outlet />
-</section>
-
+          <section className="max-w-screen-2xl mx-auto p-7 mt-2 2xl:p-9 2xl:mt-4">
+            <Outlet />
+          </section>
         </main>
-        <Footer />
+        <Footer darkMode={darkMode} />
       </div>
     </AuthProvider>
   );

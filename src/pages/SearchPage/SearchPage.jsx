@@ -40,7 +40,7 @@ const SearchPage = () => {
 
   return (
     <div className={`min-h-screen p-10 ${darkMode ? ' text-white' : ' text-gray-900'}`}>
-      <h1 className="text-center text-3xl font-bold mb-10">Buscar Libros</h1>
+      <h1 className="text-center text-2xl 2xl:text-4xl font-bold m-10 ">Buscar Libros</h1>
       <div className="flex justify-center mb-10">
         <div className="w-full max-w-3xl">
           <BookSearch />

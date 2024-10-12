@@ -32,7 +32,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-[#040714] bg-opacity-90 backdrop-blur-md fixed w-full z-50 transition-all duration-700 ease-in-out p-4">
+    <nav className="bg-[#040714] bg-opacity-90 backdrop-blur-md fixed w-full z-50 transition-all duration-900 ease-in-out p-4">
       <div className="container mx-auto flex justify-between items-center max-w-screen-2xl">
        
         <div className="flex flex-1 justify-start">
@@ -102,7 +102,7 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden bg-[#040714] p-4 space-y-4">
+        <div className="md:hidden  p-4 space-y-4">
           {NAVIGATION_LINK.map(({ link, text }) => {
             const isActiveLink = location.pathname === link;
             return (

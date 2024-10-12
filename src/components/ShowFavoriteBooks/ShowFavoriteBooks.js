@@ -69,7 +69,7 @@ const ShowFavoriteBooks = () => {
     <>
       <div className={`font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
       </div>
-        <h2 className="text-4xl font-bold m-20">Tus Libros Favoritos</h2>
+        <h2 className="text-4xl font-bold m-20 text-center">Tus Libros Favoritos</h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 gap-7">
         {booksData.map((book) => (

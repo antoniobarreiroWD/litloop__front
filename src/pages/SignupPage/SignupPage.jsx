@@ -21,7 +21,7 @@ const SignupPage = () => {
     e.preventDefault();
     try {
       await authService.signup(userData);
-      alert("Account created. We've created your account for you.");
+      alert("Cuenta creada!.");
       navigate("/login");
     } catch (error) {
       console.log("Error ==>", error);
@@ -32,11 +32,11 @@ const SignupPage = () => {
     <FormPageLayout>
     <CustomForm
       marginBottom={"80px"}
-      title={"Signup"}
-      subtitle={"Let’s start cooking!"}
+      title={"Registro"}
+      subtitle={""}
       onChange={onChange}
       onSubmit={onSubmit}
-      options={["username", "email", "password"]}
+      options={["username", "email", "Contraseña"]}
     />
   </FormPageLayout>
   );

@@ -14,7 +14,8 @@ const useBookDetailsStore = create((set) => ({
       const response = await axiosInstance.get(`/${id}`);
       set({ book: response.data, loading: false });
     } catch (error) {
-      set({ error: error.message, loading: false });
+     
+      set({ error: error.response?.data?.message || error.message, loading: false });
     }
   },
 

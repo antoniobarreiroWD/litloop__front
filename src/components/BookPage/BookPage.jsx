@@ -46,7 +46,7 @@ const BookPage = () => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className={`font-bold mt-6 text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+      <div className={`font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
         
         <div className="mt-4 w-full flex justify-center">
           <button onClick={toggleSearch} className="text-2xl p-2 focus:outline-none z-50">

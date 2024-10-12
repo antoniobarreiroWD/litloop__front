@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
 import authService from "../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
   const setToken = (token) => {
     localStorage.setItem("token", token);
   };
+  
   const getToken = () => {
     return localStorage.getItem("token");
   };
@@ -49,7 +50,6 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  
   const updateFavoriteBooks = (newFavoriteBooks) => {
     setUser((prevUser) => ({
       ...prevUser,
@@ -66,4 +66,9 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+// Hook personalizado para acceder al contexto de autenticación
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

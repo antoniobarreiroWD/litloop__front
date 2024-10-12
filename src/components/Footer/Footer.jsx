@@ -6,11 +6,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`p-4 sm:p-6 lg:p-8 text-black text-center ${
-        darkMode
-          ? "bg-gradient-to-r from-[#101231] via-secondary to-[#101231] text-white"
-          : "bg-gradient-to-r from-background via-primary to-background"
-      }`}
+      className="bg-[#040714] bg-opacity-90 backdrop-blur-md w-full z-50 transition-all duration-900 ease-in-out p-4 text-center "
     >
       <div className="container mx-auto">
         <p>© 2024 LitLoop. Todos los derechos reservados.</p>

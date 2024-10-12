@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next'; 
 import { motion } from 'framer-motion';
 import useBookDetailsStore from '../../components/useBookDetailsStore'; 
 import useThemeStore from '../../components/useThemeStore';
+import { translateText } from '../../services/translateService'; 
 
 const BookDetails = () => {
   const { id } = useParams();
@@ -11,13 +12,29 @@ const BookDetails = () => {
   const { t } = useTranslation(); 
   const { book, fetchBookDetails, loading, error } = useBookDetailsStore(); 
   const { darkMode } = useThemeStore(); 
+  const [translatedDescription, setTranslatedDescription] = useState('');
 
+  
   useEffect(() => {
     fetchBookDetails(id); 
     return () => {
       useBookDetailsStore.getState().clearBookDetails();
     };
   }, [id, fetchBookDetails]);
+
+  
+  useEffect(() => {
+    if (book?.volumeInfo?.description) {
+      translateText(book.volumeInfo.description, 'es')
+        .then((translatedText) => {
+          setTranslatedDescription(translatedText);
+        })
+        .catch((err) => {
+          console.error('Error al traducir la descripción:', err);
+          setTranslatedDescription(book.volumeInfo.description); 
+        });
+    }
+  }, [book]);
 
   if (loading) {
     return (
@@ -71,7 +88,7 @@ const BookDetails = () => {
 
   const { volumeInfo, accessInfo } = book;
 
-  const translatedCategories = volumeInfo.categories
+  const translatedCategories = volumeInfo?.categories
     ? volumeInfo.categories.map((category) => t(category))
     : [];
 
@@ -93,30 +110,30 @@ const BookDetails = () => {
         <div className={`p-4 rounded-lg flex flex-col items-center sm:flex-row sm:items-start ${
               darkMode ? 'bg-gradient-to-b from-third via-[#67328a] to-third' : 'bg-gradient-to-b from-[#f3f4f6] via-primary to-[#f3f4f6]'
             }`}>
-              {book.volumeInfo.imageLinks?.thumbnail && (
+              {volumeInfo?.imageLinks?.thumbnail && (
                 <img
-                  src={book.volumeInfo.imageLinks.thumbnail}
-                  alt={`Portada de ${book.volumeInfo.title}`}
+                  src={volumeInfo.imageLinks.thumbnail}
+                  alt={`Portada de ${volumeInfo.title}`}
                   className="w-32 h-48 sm:w-40 sm:h-60 md:w-56 md:h-80 object-cover mb-4 sm:mb-0 sm:mr-8 rounded"
                 />
           )}
 
           <div className="flex-1">
             <h2 className={`text-2xl md:text-3xl font-bold mb-2 text-center sm:text-left ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              {volumeInfo.title}
+              {volumeInfo?.title}
             </h2>
 
-            {volumeInfo.authors && (
+            {volumeInfo?.authors && (
               <p className={`text-center sm:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 <strong>Autor(es):</strong> {volumeInfo.authors.join(', ')}
               </p>
             )}
 
             <p className={`text-center sm:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              <strong>Editorial:</strong> {volumeInfo.publisher}
+              <strong>Editorial:</strong> {volumeInfo?.publisher}
             </p>
             <p className={`text-center sm:text-left mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              <strong>Fecha de publicación:</strong> {volumeInfo.publishedDate}
+              <strong>Fecha de publicación:</strong> {volumeInfo?.publishedDate}
             </p>
 
             {translatedCategories.length > 0 && (
@@ -125,17 +142,14 @@ const BookDetails = () => {
               </p>
             )}
 
-            <p className={`mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              {volumeInfo.description ? (
-                <span dangerouslySetInnerHTML={{ __html: volumeInfo.description }}></span>
-              ) : (
-                'Descripción no disponible.'
-              )}
-            </p>
+            <div className={`mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+             
+              <div dangerouslySetInnerHTML={{ __html: translatedDescription || volumeInfo?.description }} />
+            </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4">
               <a
-                href={volumeInfo.infoLink}
+                href={volumeInfo?.infoLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-500 text-white py-2 px-4 rounded mb-4 sm:mb-0 sm:mr-4 text-center"
@@ -143,7 +157,7 @@ const BookDetails = () => {
                 Más Información
               </a>
 
-              {accessInfo.webReaderLink && (
+              {accessInfo?.webReaderLink && (
                 <a
                   href={accessInfo.webReaderLink}
                   target="_blank"

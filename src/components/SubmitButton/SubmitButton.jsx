@@ -10,7 +10,7 @@ const SubmitButton = ({ darkMode }) => {
       }`}
       type="submit"
     >
-      Submit
+      Enviar
     </button>
   )
 }

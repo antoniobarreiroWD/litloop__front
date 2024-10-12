@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import useThemeStore from '../useThemeStore';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import { useAuth } from '../../contexts/AuthContext'; 
 
 const BookCard = ({ book, showDetails = true }) => {
   const { darkMode } = useThemeStore();
+  const { currentUser } = useAuth(); 
 
- 
   const imageUrl = book.volumeInfo?.imageLinks?.thumbnail || 'ruta-de-imagen-predeterminada.jpg';
   const title = book.volumeInfo?.title || 'Título desconocido';
   const authors = book.volumeInfo?.authors?.join(', ') || 'Autor desconocido';
@@ -38,7 +39,7 @@ const BookCard = ({ book, showDetails = true }) => {
           )}
         </div>
       </Link>
-      {showDetails && (
+      {showDetails && currentUser && ( 
         <div className="absolute top-2 right-2">
           <FavoriteButton bookId={book.id} isFavoriteInitial={book.isFavorite || false} />
         </div>
