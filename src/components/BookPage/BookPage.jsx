@@ -5,9 +5,9 @@ import BookList from '../BookList/BookList';
 import useBookStore from '../useStore';
 import useThemeStore from '../useThemeStore';
 import { FaSearch, FaTimes } from 'react-icons/fa'; 
-import AxiosConfig from '../../utils/AxiosConfig'; // Ajusta la ruta si es necesario
+import AxiosConfig from '../../utils/AxiosConfig'; 
 
-const axiosInstance = new AxiosConfig('books').axios; // Instancia de Axios configurada para "books"
+const axiosInstance = new AxiosConfig('books').axios; 
 
 const BookPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
