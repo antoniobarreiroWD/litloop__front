@@ -6,7 +6,8 @@ import BookCard from '../BookCard/BookCard';
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const BookList = () => {
-  const { data: books, error } = useSWR('http://localhost:3001/api/books/popular', fetcher);
+  // const { data: books, error } = useSWR('http://localhost:3001/api/books/popular', fetcher);
+  const { data: books, error } = useSWR('https://litloop-back.onrender.com/api/books/popular', fetcher);
   const { darkMode } = useThemeStore();
 
   if (error) {
