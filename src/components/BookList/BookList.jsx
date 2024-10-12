@@ -2,12 +2,16 @@ import React from 'react';
 import useSWR from 'swr';
 import useThemeStore from '../useThemeStore';
 import BookCard from '../BookCard/BookCard';
+import AxiosConfig from '../../services/axios'; 
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+
+const axiosInstance = new AxiosConfig('books').axios;
+
+const fetcher = (url) => axiosInstance.get(url).then((res) => res.data);
 
 const BookList = () => {
-  // const { data: books, error } = useSWR('http://localhost:3001/api/books/popular', fetcher);
-  const { data: books, error } = useSWR('https://litloop-back.onrender.com/api/books/popular', fetcher);
+  
+  const { data: books, error } = useSWR('/popular', fetcher);
   const { darkMode } = useThemeStore();
 
   if (error) {

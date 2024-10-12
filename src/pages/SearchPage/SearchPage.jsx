@@ -3,6 +3,10 @@ import BookSearch from '.././../components/BookSearch/BookSearch';
 import BookResults from '.././../components/BookResults/BookResults';
 import useBookStore from '../../components/useStore';
 import useThemeStore from '../../components/useThemeStore';
+import AxiosConfig from '../../services/axios';
+
+
+const axiosInstance = new AxiosConfig('books').axios;
 
 const SearchPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
@@ -13,21 +17,10 @@ const SearchPage = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3001/api/books/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ q: query, page }),
-      });
+      const response = await axiosInstance.post('/search', { q: query, page });
 
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
-      }
-
-      const data = await response.json();
-      setBooks(data.books);
-      setTotalPages(data.totalPages);
+      setBooks(response.data.books);
+      setTotalPages(response.data.totalPages);
     } catch (err) {
       setError('Error al realizar la búsqueda');
     }

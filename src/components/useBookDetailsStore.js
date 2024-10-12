@@ -1,4 +1,7 @@
 import { create } from 'zustand';
+import AxiosConfig from '../services/axios'; 
+
+const axiosInstance = new AxiosConfig('books').axios; 
 
 const useBookDetailsStore = create((set) => ({
   book: null,
@@ -8,12 +11,8 @@ const useBookDetailsStore = create((set) => ({
   fetchBookDetails: async (id) => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch(`http://localhost:3001/api/books/${id}`);
-      if (!response.ok) {
-        throw new Error('Error al obtener los detalles del libro');
-      }
-      const data = await response.json();
-      set({ book: data, loading: false });
+      const response = await axiosInstance.get(`/${id}`);
+      set({ book: response.data, loading: false });
     } catch (error) {
       set({ error: error.message, loading: false });
     }

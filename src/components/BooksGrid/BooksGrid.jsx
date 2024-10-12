@@ -1,27 +1,28 @@
 import React from "react";
 import useSWR from 'swr';
 import CustomLink from "../CustomLink/CustomLink"; 
-import useThemeStore from "../../components/useThemeStore"; 
+import useThemeStore from "../../components/useThemeStore";
+import AxiosConfig from "../../utils/AxiosConfig"; 
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+
+const axiosInstance = new AxiosConfig('books').axios;
+
+const fetcher = (url) => axiosInstance.get(url).then((res) => res.data);
 
 const BooksGrid = () => {
   const { darkMode } = useThemeStore();
 
- 
-  const { data: books, error } = useSWR('http://localhost:3001/api/books/popular', fetcher);
-
   
+  const { data: books, error } = useSWR('/popular', fetcher);
+
   if (error) {
     return <p>Error al cargar los libros: {error.message}</p>;
   }
 
-  
   if (!books) {
     return <p>Cargando...</p>; 
   }
 
-  
   if (!Array.isArray(books)) {
     return <p>Error: La respuesta no es un listado de libros válido.</p>;
   }
@@ -73,4 +74,3 @@ const BooksGrid = () => {
 };
 
 export default BooksGrid;
-

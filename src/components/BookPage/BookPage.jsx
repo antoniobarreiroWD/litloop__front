@@ -5,6 +5,9 @@ import BookList from '../BookList/BookList';
 import useBookStore from '../useStore';
 import useThemeStore from '../useThemeStore';
 import { FaSearch, FaTimes } from 'react-icons/fa'; 
+import AxiosConfig from '../../utils/AxiosConfig'; // Ajusta la ruta si es necesario
+
+const axiosInstance = new AxiosConfig('books').axios; // Instancia de Axios configurada para "books"
 
 const BookPage = () => {
   const { books, totalPages, currentPage, searchQuery, loading, error, setBooks, setTotalPages, setCurrentPage, setLoading, setError } = useBookStore();
@@ -16,27 +19,16 @@ const BookPage = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3001/api/books/search', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ q: query, page }),
-      });
+      const response = await axiosInstance.post('/search', { q: query, page });
 
-      if (!response.ok) {
-        throw new Error('Error en la solicitud');
-      }
-
-      const data = await response.json();
-      setBooks(data.books);
-      setTotalPages(data.totalPages);
+      setBooks(response.data.books);
+      setTotalPages(response.data.totalPages);
     } catch (err) {
       setError('Error al realizar la búsqueda');
     }
 
     setLoading(false);
-  }, [setBooks, setTotalPages, setLoading, setError]);
+  }, [axiosInstance, setBooks, setTotalPages, setLoading, setError]);
 
   useEffect(() => {
     if (searchQuery) {
@@ -62,7 +54,6 @@ const BookPage = () => {
           </button>
         </div>
 
-        
         {showSearch && (
           <div className="mt-4 w-full flex justify-center">
             <BookSearch />
