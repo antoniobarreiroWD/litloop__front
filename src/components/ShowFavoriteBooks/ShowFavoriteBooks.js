@@ -13,8 +13,7 @@ const ShowFavoriteBooks = () => {
   const fetchBookData = async (bookId) => {
     try {
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`);
-      const data = await response.json();
-      return data;
+      return response.json();
     } catch (error) {
       console.error('Error fetching book data:', error);
       throw error;
@@ -29,15 +28,9 @@ const ShowFavoriteBooks = () => {
       }
 
       try {
-        setLoading(true);
-        setError(null); 
         const booksInfo = await Promise.all(
           user.favoriteBooks.map((book) => fetchBookData(book.bookId))
         );
-        
-       
-      
-
         setBooksData(booksInfo);
       } catch (error) {
         setError('No se pudieron cargar los libros favoritos. Inténtalo más tarde.');
@@ -47,7 +40,7 @@ const ShowFavoriteBooks = () => {
     };
 
     fetchFavoriteBooksData();
-  }, [user]); 
+  }, [user]);
 
   if (!user) {
     return <p>No has iniciado sesión.</p>; 
@@ -67,17 +60,17 @@ const ShowFavoriteBooks = () => {
 
   return (
     <>
-      <div className={`font-bold text-center ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-      </div>
-        <h2 className="text-4xl font-bold m-20 text-center">Tus Libros Favoritos</h2>
-
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 gap-7">
+    <div className="mt-20">
+      <h2 className={`text-2xl 2xl:text-4xl font-bold text-center m-2 2xl:m-10 ${darkMode ? 'text-contrastText' : 'text-gray-900'}`}>Tus Libros Favoritos</h2>
+      <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 gap-7 ${darkMode ? 'text-contrastText' : 'text-gray-900'}`}>
         {booksData.map((book) => (
           <BookCard key={book.id} book={book} showDetails={true} />
         ))}
       </div>
+    </div>
     </>
   );
 };
 
 export default ShowFavoriteBooks;
+

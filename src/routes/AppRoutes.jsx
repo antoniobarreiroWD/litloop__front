@@ -28,8 +28,7 @@ const AppRoutes = () => {
         },
         {
           path: "/books",
-          element: <ShowFavoriteBooks
-               />,
+          element: <ShowFavoriteBooks />,
         },
         {
           path: "/search",

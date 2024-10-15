@@ -14,7 +14,6 @@ const BookDetails = () => {
   const { darkMode } = useThemeStore(); 
   const [translatedDescription, setTranslatedDescription] = useState('');
 
-  
   useEffect(() => {
     fetchBookDetails(id); 
     return () => {
@@ -22,7 +21,6 @@ const BookDetails = () => {
     };
   }, [id, fetchBookDetails]);
 
-  
   useEffect(() => {
     if (book?.volumeInfo?.description) {
       translateText(book.volumeInfo.description, 'es')
@@ -99,23 +97,25 @@ const BookDetails = () => {
       exit={{ opacity: 0, x: 100 }}      
       transition={{ duration: 0.5 }}     
     >
-      <div className="container max-w-screen-lg mx-auto py-6 px-4 sm:px-8">
-        <button
-          onClick={() => navigate('/')} 
-          className="bg-blue-500 text-white py-2 px-4 rounded mb-4"
-        >
-          Volver al Inicio
-        </button>
+      <div className="container max-w-screen-lg mx-auto py-6 px-4 sm:px-8 mt-9">
+        <div className="flex justify-between items-start mb-2">
+          <button
+            onClick={() => navigate('/')} 
+            className="bg-blue-500 text-white py-2 px-4 rounded"
+          >
+            Volver al Inicio
+          </button>
+        </div>
 
-        <div className={`p-4 rounded-lg flex flex-col items-center sm:flex-row sm:items-start ${
-              darkMode ? 'bg-gradient-to-b from-third via-[#67328a] to-third' : 'bg-gradient-to-b from-[#f3f4f6] via-primary to-[#f3f4f6]'
-            }`}>
-              {volumeInfo?.imageLinks?.thumbnail && (
-                <img
-                  src={volumeInfo.imageLinks.thumbnail}
-                  alt={`Portada de ${volumeInfo.title}`}
-                  className="w-32 h-48 sm:w-40 sm:h-60 md:w-56 md:h-80 object-cover mb-4 sm:mb-0 sm:mr-8 rounded"
-                />
+        <div className={`p-4 rounded-lg flex flex-col items-center sm:flex-row sm:items-start border-2 ${
+          darkMode ? 'border-contrastText' : 'border-gray-300'
+        }`}>
+          {volumeInfo?.imageLinks?.thumbnail && (
+            <img
+              src={volumeInfo.imageLinks.thumbnail}
+              alt={`Portada de ${volumeInfo.title}`}
+              className="w-32 h-48 sm:w-40 sm:h-60 md:w-56 md:h-80 object-cover mb-4 sm:mb-0 sm:mr-8 rounded"
+            />
           )}
 
           <div className="flex-1">
@@ -143,7 +143,6 @@ const BookDetails = () => {
             )}
 
             <div className={`mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-             
               <div dangerouslySetInnerHTML={{ __html: translatedDescription || volumeInfo?.description }} />
             </div>
 
@@ -176,3 +175,4 @@ const BookDetails = () => {
 };
 
 export default BookDetails;
+

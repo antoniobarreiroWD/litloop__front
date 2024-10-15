@@ -26,15 +26,15 @@ const Navbar = () => {
     { link: '/search', text: 'Búsqueda' }, 
   ];
 
-  
   if (user) {
     NAVIGATION_LINK.splice(1, 0, { link: '/Books', text: 'Mis Libros' });
   }
 
   return (
-    <nav className="bg-[#040714] bg-opacity-90 backdrop-blur-md fixed w-full z-50 transition-all duration-900 ease-in-out p-4">
+    <nav className={`fixed w-full z-50 p-4 transition-all duration-900 ease-in-out ${
+      darkMode ? ' text-white' : 'bg-gray-100 text-black'
+    } bg-opacity-90 backdrop-blur-md`}>
       <div className="container mx-auto flex justify-between items-center max-w-screen-2xl">
-       
         <div className="flex flex-1 justify-start">
           <NavigationLink to="/">
             <img
@@ -52,7 +52,9 @@ const Navbar = () => {
               <NavigationLink
                 to={link}
                 key={text}
-                className={`text-white tracking-wide ${isActiveLink ? 'font-semibold border-b-2 border-white' : 'font-light'} hover:text-gray-300 transition-colors duration-300`}
+                className={`tracking-wide ${
+                  isActiveLink ? 'font-semibold border-b-2' : 'font-light'
+                } hover:opacity-75 transition-colors duration-300`}
               >
                 {text}
               </NavigationLink>
@@ -63,27 +65,27 @@ const Navbar = () => {
         <div className="hidden md:flex flex-1 justify-end items-center space-x-6">
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded-full text-white hover:bg-gray-700 transition-colors duration-300"
+            className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-300"
           >
             {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
           </button>
 
-          <div className="flex items-center space-x-4 text-white">
+          <div className="flex items-center space-x-4">
             {user ? (
               <>
                 <AuthLink to="/profile">
-                  <FaUser className="w-5 h-5 hover:text-gray-300 transition-colors duration-300" />
+                  <FaUser className="w-5 h-5 hover:opacity-75 transition-opacity duration-300" />
                 </AuthLink>
-                <AuthLink onClick={logout} className="hover:text-gray-300 transition-colors duration-300">
+                <AuthLink onClick={logout} className="hover:opacity-75 transition-opacity duration-300">
                   Logout
                 </AuthLink>
               </>
             ) : (
               <>
-                <AuthLink to="/login" className="hover:text-gray-300 transition-colors duration-300">
+                <AuthLink to="/login" className="hover:opacity-75 transition-opacity duration-300">
                   Login
                 </AuthLink>
-                <AuthLink to="/signup" className="hover:text-gray-300 transition-colors duration-300">
+                <AuthLink to="/signup" className="hover:opacity-75 transition-opacity duration-300">
                   Signup
                 </AuthLink>
               </>
@@ -102,14 +104,16 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden  p-4 space-y-4">
+        <div className="md:hidden p-4 space-y-4">
           {NAVIGATION_LINK.map(({ link, text }) => {
             const isActiveLink = location.pathname === link;
             return (
               <NavigationLink
                 to={link}
                 key={text}
-                className={`block text-white ${isActiveLink ? 'font-semibold' : 'font-light'} hover:text-gray-300 transition-colors duration-300`}
+                className={`block ${
+                  isActiveLink ? 'font-semibold' : 'font-light'
+                } hover:opacity-75 transition-colors duration-300`}
                 onClick={() => setIsMenuOpen(false)}  
               >
                 {text}
@@ -117,22 +121,22 @@ const Navbar = () => {
             );
           })}
 
-          <div className="flex items-center space-x-4 text-white">
+          <div className="flex items-center space-x-4">
             {user ? (
               <>
                 <AuthLink to="/profile" onClick={() => setIsMenuOpen(false)}>
                   Profile
                 </AuthLink>
-                <AuthLink onClick={logout} className="hover:text-gray-300 transition-colors duration-300">
+                <AuthLink onClick={logout} className="hover:opacity-75 transition-colors duration-300">
                   Logout
                 </AuthLink>
               </>
             ) : (
               <>
-                <AuthLink to="/login" className="hover:text-gray-300 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
+                <AuthLink to="/login" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                   Login
                 </AuthLink>
-                <AuthLink to="/signup" className="hover:text-gray-300 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
+                <AuthLink to="/signup" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
                   Signup
                 </AuthLink>
               </>
@@ -142,7 +146,7 @@ const Navbar = () => {
           <div className="mt-4 flex items-center justify-center">
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full text-white hover:bg-gray-700 transition-colors duration-300"
+              className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-300"
             >
               {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
             </button>
@@ -154,4 +158,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

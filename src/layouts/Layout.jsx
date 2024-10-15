@@ -12,7 +12,7 @@ const Layout = () => {
     <AuthProvider>
       <div
         className={`min-h-screen flex flex-col transition-colors duration-1000 font-sans ${
-          darkMode ? "bg-third text-white" : "bg-background text-black"
+          darkMode ? "bg-darkBackground text-contrastText" : "bg-background text-black"
         }`}
       >
         <Navbar darkMode={darkMode} />

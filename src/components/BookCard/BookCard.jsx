@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const BookCard = ({ book, showDetails = true }) => {
   const { darkMode } = useThemeStore();
-  const { currentUser } = useAuth(); 
+  const { currentUser } = useAuth();
 
   const imageUrl = book.volumeInfo?.imageLinks?.thumbnail || 'ruta-de-imagen-predeterminada.jpg';
   const title = book.volumeInfo?.title || 'Título desconocido';
@@ -15,19 +15,29 @@ const BookCard = ({ book, showDetails = true }) => {
 
   return (
     <div
-      className={`relative rounded-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 ${
-        darkMode ? 'bg-gray-800' : 'bg-white'
+      className={`relative rounded-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 border-2 ${
+        darkMode ? 'border-contrastText' : 'border-gray-300'
       }`}
+      style={{ width: '100%', height: 'auto' }}
     >
       <Link to={`/book/${book.id}`}>
-        <img
-          src={imageUrl}
-          alt={`Portada de ${title}`}
-          className="w-full h-44 sm:h-56 md:h-96 xl:h-80 2xl:h-72 object-center"
-        />
+        <div className="w-full h-56 sm:h-72 md:h-80 bg-transparent relative flex items-center justify-center "> 
+          <img
+            src={imageUrl}
+            alt={`Portada de ${title}`}
+            className="object-contain max-w-full max-h-full"
+            onError={(e) => {
+              e.target.src = 'ruta-de-imagen-predeterminada.jpg';
+            }}
+          />
+        </div>
         <div
-          className={`absolute inset-0 flex flex-col justify-end p-4 bg-gradient-to-t from-black to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 ${
-            darkMode ? 'text-white' : 'text-black'
+          className={`absolute inset-0 flex flex-col justify-end p-4 ${
+            darkMode 
+              ? 'bg-gradient-to-t from-black to-transparent' 
+              : 'bg-gradient-to-b from-transparent to-gray-200'
+          } opacity-0 hover:opacity-100 transition-opacity duration-300 ${
+            darkMode ? 'text-contrastText' : 'text-black'
           }`}
         >
           <h3 className="font-bold text-lg sm:text-xl">{title}</h3>
@@ -39,7 +49,7 @@ const BookCard = ({ book, showDetails = true }) => {
           )}
         </div>
       </Link>
-      {showDetails && currentUser && ( 
+      {showDetails && currentUser && (
         <div className="absolute top-2 right-2">
           <FavoriteButton bookId={book.id} isFavoriteInitial={book.isFavorite || false} />
         </div>
@@ -49,3 +59,6 @@ const BookCard = ({ book, showDetails = true }) => {
 };
 
 export default BookCard;
+
+
+

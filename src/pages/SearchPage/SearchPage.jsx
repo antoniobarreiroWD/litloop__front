@@ -5,7 +5,6 @@ import useBookStore from '../../components/useStore';
 import useThemeStore from '../../components/useThemeStore';
 import AxiosConfig from '../../services/axios';
 
-
 const axiosInstance = new AxiosConfig('books').axios;
 
 const SearchPage = () => {
@@ -18,7 +17,6 @@ const SearchPage = () => {
 
     try {
       const response = await axiosInstance.post('/search', { q: query, page });
-
       setBooks(response.data.books);
       setTotalPages(response.data.totalPages);
     } catch (err) {
@@ -39,17 +37,16 @@ const SearchPage = () => {
   };
 
   return (
-    <div className={`min-h-screen p-10 ${darkMode ? ' text-white' : ' text-gray-900'}`}>
-      <h1 className="text-center text-2xl 2xl:text-4xl font-bold m-10 ">Buscar Libros</h1>
+    <div className={`min-h-screen p-10 ${darkMode ? 'text-contrastText' : 'text-gray-900'}`}>
+      <h1 className="text-center text-2xl 2xl:text-4xl font-bold m-10">Buscar Libros</h1>
       <div className="flex justify-center mb-10">
         <div className="w-full max-w-3xl">
           <BookSearch />
         </div>
       </div>
-      
+
       {loading && <p>Cargando...</p>}
       {error && <p>{error}</p>}
-
       {searchQuery ? (
         <BookResults books={books} />
       ) : (
@@ -78,3 +75,4 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
+

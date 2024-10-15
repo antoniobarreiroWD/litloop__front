@@ -1,12 +1,14 @@
-import React from "react";
-import useThemeStore from "../useThemeStore";
+import React from 'react';
+import useThemeStore from '../useThemeStore';
 
 const Footer = () => {
   const { darkMode } = useThemeStore();
 
   return (
     <footer
-      className="bg-[#040714] bg-opacity-90 backdrop-blur-md w-full z-50 transition-all duration-900 ease-in-out p-4 text-center "
+      className={`w-full p-4 text-center transition-all duration-900 ease-in-out ${
+        darkMode ? 'bg-[#040714] text-white' : 'bg-gray-100 text-black'
+      } bg-opacity-90 backdrop-blur-md`}
     >
       <div className="container mx-auto">
         <p>© 2024 LitLoop. Todos los derechos reservados.</p>
