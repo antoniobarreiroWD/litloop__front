@@ -17,7 +17,7 @@ const ProfilePage = () => {
   return (
     <PageWrapper title="Perfil">
       <div
-        className={`flex flex-col gap-11 p-6 ${
+        className={`flex flex-col gap-11 p-6 text-center ${
           darkMode ? " text-white" : " text-gray-900"
         } transition-all duration-300`}
       >

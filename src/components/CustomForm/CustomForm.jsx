@@ -4,22 +4,17 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 import { capitalizeText } from "../../utils/index";
 import useThemeStore from "../useThemeStore";
 
-const CustomForm = ({
-  title,
-  subtitle,
-  onChange,
-  onSubmit,
-  options,
-  ...props
-}) => {
+const CustomForm = ({ title, subtitle, onChange, onSubmit, options, ...props }) => {
   const { darkMode } = useThemeStore();
 
   return (
     <div
-      className={`w-full max-w-[400px] flex flex-col ${props.className || ""}`}
+      className={`w-full max-w-[400px] flex flex-col p-8 rounded-lg shadow-lg transition-colors duration-300 ${
+        darkMode ? "bg-gray-900" : "bg-white"
+      } ${props.className || ""}`}
     >
       <h1
-        className={`text-center text-4xl font-bold ${
+        className={`text-center text-3xl font-bold mb-4 ${
           darkMode ? "text-white" : "text-gray-900"
         }`}
       >
@@ -27,27 +22,24 @@ const CustomForm = ({
       </h1>
       {subtitle && (
         <p
-          className={`text-center text-2xl ${
-            darkMode ? "text-white" : "text-gray-900"
+          className={`text-center text-lg mb-6 ${
+            darkMode ? "text-gray-300" : "text-gray-700"
           }`}
         >
           {subtitle}
         </p>
       )}
-      <form onSubmit={onSubmit} className="mt-8">
-        <div className="flex flex-col gap-8">
-          {options.map((option) => {
-            return (
-              <Input
-                type={option === "password" ? "password" : "text"}
-                name={option}
-                onChange={onChange}
-                key={option}
-                placeholder={capitalizeText(option)}
-              />
-            );
-          })}
-        </div>
+      <form onSubmit={onSubmit} className="space-y-6">
+        {options.map((option) => (
+          <Input
+            type={option === "password" ? "password" : "text"}
+            name={option}
+            onChange={onChange}
+            key={option}
+            placeholder={capitalizeText(option)}
+            darkMode={darkMode}
+          />
+        ))}
         <SubmitButton darkMode={darkMode} />
       </form>
     </div>

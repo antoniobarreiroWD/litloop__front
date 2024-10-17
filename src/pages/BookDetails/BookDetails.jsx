@@ -15,6 +15,7 @@ const BookDetails = () => {
   const [translatedDescription, setTranslatedDescription] = useState('');
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchBookDetails(id); 
     return () => {
       useBookDetailsStore.getState().clearBookDetails();
@@ -100,10 +101,10 @@ const BookDetails = () => {
       <div className="container max-w-screen-lg mx-auto py-6 px-4 sm:px-8 mt-9">
         <div className="flex justify-between items-start mb-2">
           <button
-            onClick={() => navigate('/')} 
+            onClick={() => navigate(-1)}  
             className="bg-blue-500 text-white py-2 px-4 rounded"
           >
-            Volver al Inicio
+            Volver
           </button>
         </div>
 
@@ -175,4 +176,3 @@ const BookDetails = () => {
 };
 
 export default BookDetails;
-

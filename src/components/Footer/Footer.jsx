@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer
       className={`w-full p-4 text-center transition-all duration-900 ease-in-out ${
-        darkMode ? 'bg-[#040714] text-white' : 'bg-gray-100 text-black'
+        darkMode ? 'bg-[rgb(55,74,128)] text-white' : 'bg-gray-300 text-black'
       } bg-opacity-90 backdrop-blur-md`}
     >
       <div className="container mx-auto">

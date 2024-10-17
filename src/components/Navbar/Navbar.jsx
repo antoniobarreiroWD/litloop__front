@@ -11,6 +11,7 @@ const Navbar = () => {
   const { darkMode, toggleDarkMode } = useThemeStore();
   const { user, logout } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false); 
   const location = useLocation();
 
   useEffect(() => {
@@ -20,6 +21,22 @@ const Navbar = () => {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true); 
+      } else {
+        setIsScrolled(false); 
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   const NAVIGATION_LINK = [
     { link: '/', text: 'Inicio' },
@@ -32,7 +49,7 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed w-full z-50 p-4 transition-all duration-900 ease-in-out ${
-      darkMode ? ' text-white' : 'bg-gray-100 text-black'
+      darkMode ? 'bg-[rgb(55,74,128)] text-white' : 'bg-gray-300 text-black'
     } bg-opacity-90 backdrop-blur-md`}>
       <div className="container mx-auto flex justify-between items-center max-w-screen-2xl">
         <div className="flex flex-1 justify-start">
@@ -40,7 +57,9 @@ const Navbar = () => {
             <img
               src={logo}
               alt="LitLoop Logo"
-              className="h-12 w-auto lg:h-20 transition-transform duration-300 hover:scale-105 rounded-full"
+              className={`transition-transform h-16 duration-300 hover:scale-105 rounded-full fixed -mt-8 ${
+                isScrolled ? '2xl:h-16' : '2xl:h-48'  
+              } w-auto`}
             />
           </NavigationLink>
         </div>
@@ -96,7 +115,9 @@ const Navbar = () => {
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="text-white focus:outline-none p-2"
+            className={`focus:outline-none p-2 transition-colors duration-300 ${
+              darkMode ? 'text-white' : 'text-black'
+            }`}
           >
             {isMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
           </button>

@@ -1,18 +1,18 @@
-import React from "react"
+import React from "react";
 
 const SubmitButton = ({ darkMode }) => {
   return (
     <button
-      className={`min-h-[56px] w-full text-2xl mt-14 rounded-2xl font-bold ${
+      className={`w-full py-3 text-xl font-semibold rounded-xl transition-all duration-300 transform focus:outline-none ${
         darkMode
-          ? "bg-gray-800 text-white hover:bg-gray-600"
-          : "bg-black text-gray-200 hover:bg-gray-300"
+          ? "bg-indigo-600 text-white hover:bg-indigo-500 active:scale-95"
+          : "bg-blue-500 text-white hover:bg-blue-400 active:scale-95"
       }`}
       type="submit"
     >
       Enviar
     </button>
-  )
-}
+  );
+};
 
-export default SubmitButton
+export default SubmitButton;
