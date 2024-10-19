@@ -16,9 +16,7 @@ const BookSearch = () => {
   return (
     <div className={`relative transform   w-full p-2 rounded`}>
       <div className="flex flex-col mb-4">
-        <label className={`block text-sm font-bold mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
-          Buscar por título o autor:
-        </label>
+        
         <div className="flex w-full">
           <input
             type="text"
