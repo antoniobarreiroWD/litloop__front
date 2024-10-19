@@ -10,12 +10,12 @@ const CustomForm = ({ title, subtitle, onChange, onSubmit, options, ...props }) 
   return (
     <div
       className={`w-full max-w-[400px] flex flex-col p-8 rounded-lg shadow-lg transition-colors duration-300 ${
-        darkMode ? "bg-gray-900" : "bg-white"
+        darkMode ? "bg-darkPrimary" : "bg-primary"
       } ${props.className || ""}`}
     >
       <h1
         className={`text-center text-3xl font-bold mb-4 ${
-          darkMode ? "text-white" : "text-gray-900"
+          darkMode ? "text-gray-100" : "text-gray-900"
         }`}
       >
         {title}
@@ -23,7 +23,7 @@ const CustomForm = ({ title, subtitle, onChange, onSubmit, options, ...props }) 
       {subtitle && (
         <p
           className={`text-center text-lg mb-6 ${
-            darkMode ? "text-gray-300" : "text-gray-700"
+            darkMode ? "text-gray-100" : "text-gray-900"
           }`}
         >
           {subtitle}

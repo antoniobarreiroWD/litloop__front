@@ -49,7 +49,7 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed w-full z-50 p-4 transition-all duration-900 ease-in-out ${
-      darkMode ? 'bg-[rgb(55,74,128)] text-white' : 'bg-gray-300 text-black'
+      darkMode ? 'bg-darkPrimary text-white' : 'bg-primary text-black'
     } bg-opacity-90 backdrop-blur-md`}>
       <div className="container mx-auto flex justify-between items-center max-w-screen-2xl">
         <div className="flex flex-1 justify-start">

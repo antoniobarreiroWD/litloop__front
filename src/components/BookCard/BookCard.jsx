@@ -20,7 +20,7 @@ const BookCard = ({ book, showDetails = true }) => {
   return (
     <div
       className={`relative rounded-lg overflow-hidden transition-transform duration-300 transform hover:scale-105 border-2 ${
-        darkMode ? 'border-contrastText' : 'border-gray-300'
+        darkMode ? 'border-darkPrimary' : 'border-primary'
       }`}
       style={{ width: '100%', height: 'auto' }}
     >
@@ -38,8 +38,8 @@ const BookCard = ({ book, showDetails = true }) => {
         <div
           className={`absolute inset-0 flex flex-col justify-end p-4 ${
             darkMode 
-              ? 'bg-gradient-to-t from-black to-transparent' 
-              : 'bg-gradient-to-b from-transparent to-gray-200'
+              ? 'bg-gradient-to-t from-darkPrimary to-transparent' 
+              : 'bg-gradient-to-b from-transparent to-primary'
           } opacity-0 hover:opacity-100 transition-opacity duration-300 ${
             darkMode ? 'text-contrastText' : 'text-black'
           }`}

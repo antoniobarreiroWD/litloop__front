@@ -7,21 +7,23 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#004d40', 
-        secondary: '#a5d6a7', 
-        third: '#0d47a1', 
-        background: '#f3f4f6',
-        darkBackground: '#121212', 
+        primary: '#40c9c6', 
+        darkPrimary: '#1f6f78', 
+        secondary: '#fcb8d2', 
+        darkSecondary: '#b96785', 
+        third: '#125d98', 
+        background: '#e0f7fa', 
+        darkBackground: '#1b1e2a', 
         topBlueList: '#1e3a8a', 
-        contrastText: '#e0f7fa', 
-        accent: '#ff7043', 
+        contrastText: '#ffffff', 
+        accent: '#ff6f91', 
       },
       fontFamily: {
         sans: ['Quicksand', 'sans-serif'],
       },
       gradientColorStops: theme => ({
-        'primary-gradient': '#0d47a1', 
-        'secondary-gradient': '#ff4081', 
+        'primary-gradient': '#40c9c6', 
+        'secondary-gradient': '#fcb8d2', 
       }),
     },
   },
