@@ -18,25 +18,25 @@ const SignupPage = () => {
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await authService.signup(userData);
+      await authService.signup(userData)
       alert("Cuenta creada!.");
-      navigate("/login");
+      navigate("/login")
     } catch (error) {
-      console.log("Error ==>", error);
+      console.log("Error ==>", error)
     }
-  };
+  }
 
   return (
     <FormPageLayout>
     <CustomForm
       marginBottom={"80px"}
-      title={"Registro"}
-      subtitle={""}
+      title="Registro"
+      subtitle=""
       onChange={onChange}
       onSubmit={onSubmit}
-      options={["username", "email", "Contraseña"]}
+      options={["username", "email", "password"]}
     />
   </FormPageLayout>
   );
