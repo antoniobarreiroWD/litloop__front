@@ -84,7 +84,7 @@ const Navbar = () => {
         <div className="hidden md:flex flex-1 justify-end items-center space-x-6">
           <button
             onClick={toggleDarkMode}
-            className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-300"
+            className={`p-2 rounded-full transition-colors duration-300 ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-300'}`}
           >
             {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
           </button>
@@ -125,55 +125,56 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="md:hidden p-4 space-y-4">
-          {NAVIGATION_LINK.map(({ link, text }) => {
-            const isActiveLink = location.pathname === link;
-            return (
-              <NavigationLink
-                to={link}
-                key={text}
-                className={`block ${
-                  isActiveLink ? 'font-semibold' : 'font-light'
-                } hover:opacity-75 transition-colors duration-300`}
-                onClick={() => setIsMenuOpen(false)}  
-              >
-                {text}
-              </NavigationLink>
-            );
-          })}
+  <div className="md:hidden p-4 flex flex-col items-center justify-center space-y-4">
+    {NAVIGATION_LINK.map(({ link, text }) => {
+      const isActiveLink = location.pathname === link;
+      return (
+        <NavigationLink
+          to={link}
+          key={text}
+          className={`block w-full text-center ${
+            isActiveLink ? 'font-semibold' : 'font-light'
+          } hover:opacity-75 transition-colors duration-300`}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          {text}
+        </NavigationLink>
+      );
+    })}
 
-          <div className="flex items-center space-x-4">
-            {user ? (
-              <>
-                <AuthLink to="/profile" onClick={() => setIsMenuOpen(false)}>
-                  Profile
-                </AuthLink>
-                <AuthLink onClick={logout} className="hover:opacity-75 transition-colors duration-300">
-                  Logout
-                </AuthLink>
-              </>
-            ) : (
-              <>
-                <AuthLink to="/login" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
-                  Login
-                </AuthLink>
-                <AuthLink to="/signup" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
-                  Signup
-                </AuthLink>
-              </>
-            )}
-          </div>
-
-          <div className="mt-4 flex items-center justify-center">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-300"
-            >
-              {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
-            </button>
-          </div>
-        </div>
+    <div className="flex items-center justify-center space-x-4">
+      {user ? (
+        <>
+          <AuthLink to="/profile" onClick={() => setIsMenuOpen(false)}>
+            Profile
+          </AuthLink>
+          <AuthLink onClick={logout} className="hover:opacity-75 transition-colors duration-300">
+            Logout
+          </AuthLink>
+        </>
+      ) : (
+        <>
+          <AuthLink to="/login" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
+            Login
+          </AuthLink>
+          <AuthLink to="/signup" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
+            Signup
+          </AuthLink>
+        </>
       )}
+    </div>
+
+    <div className="mt-4 flex items-center justify-center">
+      <button
+        onClick={toggleDarkMode}
+        className="p-2 rounded-full hover:bg-gray-700 transition-colors duration-300"
+      >
+        {darkMode ? <FaSun className="w-5 h-5" /> : <FaMoon className="w-5 h-5" />}
+      </button>
+    </div>
+  </div>
+)}
+
     </nav>
   );
 };
