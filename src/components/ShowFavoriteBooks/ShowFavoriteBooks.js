@@ -13,7 +13,10 @@ const ShowFavoriteBooks = () => {
   const fetchBookData = async (bookId) => {
     try {
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${bookId}`);
-      return response.json();
+      if (!response.ok) {
+        throw new Error(`Error al obtener el libro con ID: ${bookId}`);
+      }
+      return await response.json();
     } catch (error) {
       console.error('Error fetching book data:', error);
       throw error;
@@ -22,16 +25,28 @@ const ShowFavoriteBooks = () => {
 
   useEffect(() => {
     const fetchFavoriteBooksData = async () => {
+      
       if (!user || !user.favoriteBooks || user.favoriteBooks.length === 0) {
+        setBooksData([]);  
         setLoading(false);
         return;
       }
 
       try {
         const booksInfo = await Promise.all(
-          user.favoriteBooks.map((book) => fetchBookData(book.bookId))
+          user.favoriteBooks.map(async (book) => {
+            const bookId = book.bookId || book;  
+            try {
+              return await fetchBookData(bookId);
+            } catch (error) {
+              console.error('Error fetching book:', bookId, error);
+              return null; 
+            }
+          })
         );
-        setBooksData(booksInfo);
+
+        const validBooks = booksInfo.filter(book => book !== null && book.id && book.volumeInfo);
+        setBooksData(validBooks);
       } catch (error) {
         setError('No se pudieron cargar los libros favoritos. Inténtalo más tarde.');
       } finally {
@@ -42,6 +57,7 @@ const ShowFavoriteBooks = () => {
     fetchFavoriteBooksData();
   }, [user]);
 
+  
   if (!user) {
     return <p>No has iniciado sesión.</p>; 
   }
@@ -54,12 +70,21 @@ const ShowFavoriteBooks = () => {
     return <p className="text-red-500">{error}</p>;
   }
 
+  
   if (!booksData || booksData.length === 0) {
-    return <p>No tienes libros favoritos aún.</p>;
+    return (
+      <div className="mt-20">
+        <h2 className={`text-2xl 2xl:text-4xl font-bold text-center m-2 2xl:m-10 ${darkMode ? 'text-contrastText' : 'text-gray-900'}`}>
+          Tus Libros Favoritos
+        </h2>
+        <p className={`text-center text-lg ${darkMode ? 'text-contrastText' : 'text-gray-700'}`}>
+          Aún no tienes libros favoritos. Añade algunos para verlos aquí.
+        </p>
+      </div>
+    );
   }
 
   return (
-    <>
     <div className="mt-20">
       <h2 className={`text-2xl 2xl:text-4xl font-bold text-center m-2 2xl:m-10 ${darkMode ? 'text-contrastText' : 'text-gray-900'}`}>Tus Libros Favoritos</h2>
       <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-7 gap-7 ${darkMode ? 'text-contrastText' : 'text-gray-900'}`}>
@@ -68,7 +93,6 @@ const ShowFavoriteBooks = () => {
         ))}
       </div>
     </div>
-    </>
   );
 };
 
