@@ -17,6 +17,7 @@ const BookDetails = () => {
   const [translatedDescription, setTranslatedDescription] = useState("");
   const [showDescription, setShowDescription] = useState(false);
   const [isTranslated, setIsTranslated] = useState(false);
+  const [isTranslating, setIsTranslating] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,6 +38,7 @@ const BookDetails = () => {
 
   const handleShowDescription = () => {
     if (!isTranslated && !translatedDescription) {
+      setIsTranslating(true);
       translateService
         .translateText(originalDescription, "es")
         .then((translatedText) => {
@@ -48,6 +50,9 @@ const BookDetails = () => {
             "Lo sentimos, hemos alcanzado el límite de traducciones. Mostrando el contenido original:"
           );
           setIsTranslated(false);
+        })
+        .finally(() => {
+          setIsTranslating(false);
         });
     }
     setShowDescription(!showDescription);
@@ -187,18 +192,7 @@ const BookDetails = () => {
                 <strong>Categorías:</strong> {translatedCategories.join(", ")}
               </p>
             )}
-            <div className="flex justify-center">
-              <button
-                onClick={handleShowDescription}
-                className={`mb-4 py-2 px-4 rounded ${
-                  darkMode
-                    ? "bg-gray-700 text-gray-300"
-                    : "bg-blue-700 text-gray-200"
-                }`}
-              >
-                {showDescription ? "Ocultar Descripción" : "Leer Descripción"}
-              </button>
-            </div>
+
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={
@@ -223,15 +217,30 @@ const BookDetails = () => {
               )}
             </motion.div>
 
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 mt-4">
               <a
                 href={volumeInfo?.infoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-blue-500 text-white py-2 px-4 rounded mb-4 sm:mb-0 sm:mr-4 text-center"
+                className="bg-blue-500 text-white py-2 px-4 rounded text-center"
               >
                 Más Información
               </a>
+
+              <button
+                onClick={handleShowDescription}
+                className={`py-2 px-4 rounded ${
+                  darkMode
+                    ? "bg-gray-700 text-gray-300"
+                    : "bg-blue-700 text-gray-200"
+                }`}
+              >
+                {isTranslating
+                  ? "Traduciendo..."
+                  : showDescription
+                  ? "Ocultar Descripción"
+                  : "Leer Descripción"}
+              </button>
 
               {accessInfo?.webReaderLink && (
                 <a

@@ -1,14 +1,31 @@
-import React from 'react';
-import BookList from '../../components/BookList/BookList';
-
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import BookList from "../../components/BookList/BookList";
+import WelcomeBanner from "../../components/WelcomeBanner/WelcomeBanner";
 
 const HomePage = () => {
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
+
+  const hideBanner = () => {
+    setIsBannerVisible(false);
+  };
+
   return (
-    <div className="container mx-auto py-10">
-    
-     
-      <BookList />
+    <div className="relative">
       
+      {isBannerVisible && (
+        <WelcomeBanner onHide={hideBanner} isVisible={isBannerVisible} />
+      )}
+
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isBannerVisible ? 0.5 : 1 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto py-10"
+      >
+        <BookList />
+      </motion.div>
     </div>
   );
 };

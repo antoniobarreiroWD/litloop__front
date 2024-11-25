@@ -49,7 +49,7 @@ const Navbar = () => {
 
   return (
     <nav className={`fixed w-full z-50 p-4 transition-all duration-900 ease-in-out ${
-      darkMode ? 'bg-darkPrimary text-white' : 'bg-primary text-black'
+      darkMode ? 'bg-primary text-white' : 'bg-primary text-black'
     } bg-opacity-90 backdrop-blur-md`}>
       <div className="container mx-auto flex justify-between items-center max-w-screen-2xl">
         <div className="flex flex-1 justify-start">
@@ -105,7 +105,7 @@ const Navbar = () => {
                   Login
                 </AuthLink>
                 <AuthLink to="/signup" className="hover:opacity-75 transition-opacity duration-300">
-                  Signup
+                  Registro
                 </AuthLink>
               </>
             )}
@@ -158,7 +158,7 @@ const Navbar = () => {
             Login
           </AuthLink>
           <AuthLink to="/signup" className="hover:opacity-75 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>
-            Signup
+            Registro
           </AuthLink>
         </>
       )}
